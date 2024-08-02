@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://bioub.github.io/dom-visualizer/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>DOM Visualizer</title>
+
+    <link rel="stylesheet" href="./DOM Visualizer_files/semantic.css">
+    <!--<link rel="stylesheet" href="../bower_components/semantic-ui/build/uncompressed/collections/menu.css">-->
+    <!--<link rel="stylesheet" href="../bower_components/semantic-ui/build/uncompressed/collections/form.css">-->
+    <!--<link rel="stylesheet" href="../bower_components/semantic-ui/build/uncompressed/elements/input.css">-->
+    <!--<link rel="stylesheet" href="../bower_components/semantic-ui/build/uncompressed/elements/icon.css">-->
+    <!--<link rel="stylesheet" href="../bower_components/semantic-ui/build/uncompressed/elements/button.css">-->
+    <!--<link rel="stylesheet" href="../bower_components/semantic-ui/build/uncompressed/elements/label.css">-->
+    <!--<link rel="stylesheet" href="../bower_components/semantic-ui/build/uncompressed/modules/checkbox.css">-->
+    <script src="./DOM Visualizer_files/jquery.js"></script>
+    <!--<script src="../bower_components/jquery-ui/jquery-ui.js"></script>-->
+    <!--<script src="../bower_components/semantic-ui/build/packaged/javascript/semantic.js"></script>-->
+    <!--<script src="../bower_components/semantic-ui/build/uncompressed/modules/checkbox.js"></script>-->
+    <!--<link rel="stylesheet" href="css/d3.domVisualizer.css">-->
+    <link href="./DOM Visualizer_files/css" rel="stylesheet" type="text/css">
+    <style>
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 8px;
+            color: #222;
+            font-family: 'Open Sans', arial, sans-serif;
+            height: 100%;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        #editorPane {
+            /*width: 50%;*/
+            height: 40%;
+            /*float: left;*/
+            /*padding: 0 5px 23px 5px;*/
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            padding-top: 24px;
+            position: relative;
+        }
+
+        #editorPane .divider {
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
+
+        #editor {
+            font: 10pt 'Source Code Pro', sans-serif;
+            outline: none;
+            resize: none;
+            /*border: 0px solid transparent;*/
+            /*border-radius: 8px;*/
+            /*border-top: 24px solid transparent;*/
+            /*border: none;*/
+            /*padding: 10px;*/
+            width: 100%;
+            /*height: 100%;*/
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 100%;
+            /*float: left;*/
+            /*padding: 0 5px 23px 5px;*/
+            /*box-sizing: border-box;*/
+            /*-moz-box-sizing: border-box;*/
+        }
+
+        #container {
+            /*overflow: hidden;*/
+            height: 100%;
+        }
+
+        .ui.fitted.divider {
+            margin: 4px 0;
+            cursor: ns-resize;
+        }
+
+        #treePane {
+            height: 60%;
+            /*border-radius: 8px;*/
+            border: 5px solid #222;
+            background: #fff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            /*float: left;*/
+            width: 100%;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow: auto;
+            text-align: center;
+        }
+
+
+    </style>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/ace" src="./DOM Visualizer_files/ace.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bower_components/d3/d3" src="./DOM Visualizer_files/d3.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/d3.domVisualizer" src="./DOM Visualizer_files/d3.domVisualizer.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/fixoldbrowsers" src="./DOM Visualizer_files/fixoldbrowsers.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/dom" src="./DOM Visualizer_files/dom.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/event" src="./DOM Visualizer_files/event.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/editor" src="./DOM Visualizer_files/editor.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/edit_session" src="./DOM Visualizer_files/edit_session.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/undomanager" src="./DOM Visualizer_files/undomanager.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/virtual_renderer" src="./DOM Visualizer_files/virtual_renderer.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/worker/worker_client" src="./DOM Visualizer_files/worker_client.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/keyboard/hash_handler" src="./DOM Visualizer_files/hash_handler.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/placeholder" src="./DOM Visualizer_files/placeholder.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/multi_select" src="./DOM Visualizer_files/multi_select.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/folding/fold_mode" src="./DOM Visualizer_files/fold_mode.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/theme/textmate" src="./DOM Visualizer_files/textmate.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/ext/error_marker" src="./DOM Visualizer_files/error_marker.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/config" src="./DOM Visualizer_files/config.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="delta/main" src="./DOM Visualizer_files/main.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/regexp" src="./DOM Visualizer_files/regexp.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/es5-shim" src="./DOM Visualizer_files/es5-shim.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/keys" src="./DOM Visualizer_files/keys.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/useragent" src="./DOM Visualizer_files/useragent.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/oop" src="./DOM Visualizer_files/oop.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/net" src="./DOM Visualizer_files/net.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/event_emitter" src="./DOM Visualizer_files/event_emitter.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/range" src="./DOM Visualizer_files/range.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/layer/gutter" src="./DOM Visualizer_files/gutter.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/layer/marker" src="./DOM Visualizer_files/marker.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/layer/text" src="./DOM Visualizer_files/text.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/layer/cursor" src="./DOM Visualizer_files/cursor.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/scrollbar" src="./DOM Visualizer_files/scrollbar.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/renderloop" src="./DOM Visualizer_files/renderloop.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/layer/font_metrics" src="./DOM Visualizer_files/font_metrics.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/requirejs/text" src="./DOM Visualizer_files/text(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="delta/delta/lcs" src="./DOM Visualizer_files/lcs.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="delta/delta/tree" src="./DOM Visualizer_files/tree.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="delta/delta/xcc" src="./DOM Visualizer_files/xcc.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="delta/delta/delta" src="./DOM Visualizer_files/delta.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/line_widgets" src="./DOM Visualizer_files/line_widgets.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/range_list" src="./DOM Visualizer_files/range_list.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/selection" src="./DOM Visualizer_files/selection.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mouse/multi_select_handler" src="./DOM Visualizer_files/multi_select_handler.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/lib/lang" src="./DOM Visualizer_files/lang.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/commands/multi_select_commands" src="./DOM Visualizer_files/multi_select_commands.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/search" src="./DOM Visualizer_files/search.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/text" src="./DOM Visualizer_files/text(2).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/document" src="./DOM Visualizer_files/document.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/background_tokenizer" src="./DOM Visualizer_files/background_tokenizer.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/search_highlight" src="./DOM Visualizer_files/search_highlight.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/edit_session/folding" src="./DOM Visualizer_files/folding.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/edit_session/bracket_match" src="./DOM Visualizer_files/bracket_match.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/keyboard/textinput" src="./DOM Visualizer_files/textinput.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mouse/mouse_handler" src="./DOM Visualizer_files/mouse_handler.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mouse/fold_handler" src="./DOM Visualizer_files/fold_handler.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/keyboard/keybinding" src="./DOM Visualizer_files/keybinding.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/commands/command_manager" src="./DOM Visualizer_files/command_manager.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/commands/default_commands" src="./DOM Visualizer_files/default_commands.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/token_iterator" src="./DOM Visualizer_files/token_iterator.js"></script><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/tokenizer" src="./DOM Visualizer_files/tokenizer.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/text_highlight_rules" src="./DOM Visualizer_files/text_highlight_rules.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/behaviour" src="./DOM Visualizer_files/behaviour.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/unicode" src="./DOM Visualizer_files/unicode.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/anchor" src="./DOM Visualizer_files/anchor.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mouse/default_handlers" src="./DOM Visualizer_files/default_handlers.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mouse/default_gutter_handler" src="./DOM Visualizer_files/default_gutter_handler.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mouse/mouse_event" src="./DOM Visualizer_files/mouse_event.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mouse/dragdrop_handler" src="./DOM Visualizer_files/dragdrop_handler.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/edit_session/fold_line" src="./DOM Visualizer_files/fold_line.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/edit_session/fold" src="./DOM Visualizer_files/fold.js"></script><style id="ace_editor">.ace_editor {
+    position: relative;
+    overflow: hidden;
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    direction: ltr;
+}
+
+.ace_scroller {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    background-color: inherit;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: text;
+}
+
+.ace_content {
+    position: absolute;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 100%;
+}
+
+.ace_dragging .ace_scroller:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: rgba(250, 250, 250, 0.01);
+    z-index: 1000;
+}
+.ace_dragging.ace_dark .ace_scroller:before{
+    background: rgba(0, 0, 0, 0.01);
+}
+
+.ace_selecting, .ace_selecting * {
+    cursor: text !important;
+}
+
+.ace_gutter {
+    position: absolute;
+    overflow : hidden;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    cursor: default;
+    z-index: 4;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.ace_gutter-active-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.ace_scroller.ace_scroll-left {
+    box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
+}
+
+.ace_gutter-cell {
+    padding-left: 19px;
+    padding-right: 6px;
+    background-repeat: no-repeat;
+}
+
+.ace_gutter-cell.ace_error {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+
+.ace_gutter-cell.ace_warning {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");
+    background-position: 2px center;
+}
+
+.ace_gutter-cell.ace_info {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");
+    background-position: 2px center;
+}
+.ace_dark .ace_gutter-cell.ace_info {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");
+}
+
+.ace_scrollbar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+}
+
+.ace_scrollbar-inner {
+    position: absolute;
+    cursor: text;
+    left: 0;
+    top: 0;
+}
+
+.ace_scrollbar-v{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    top: 0;
+}
+
+.ace_scrollbar-h {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    left: 0;
+}
+
+.ace_print-margin {
+    position: absolute;
+    height: 100%;
+}
+
+.ace_text-input {
+    position: absolute;
+    z-index: 0;
+    width: 0.5em;
+    height: 1em;
+    opacity: 0;
+    background: transparent;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    resize: none;
+    outline: none;
+    overflow: hidden;
+    font: inherit;
+    padding: 0 1px;
+    margin: 0 -1px;
+    text-indent: -1em;
+    -ms-user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+.ace_text-input.ace_composition {
+    background: inherit;
+    color: inherit;
+    z-index: 1000;
+    opacity: 1;
+    text-indent: 0;
+}
+
+.ace_layer {
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    white-space: pre;
+    height: 100%;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /* setting pointer-events: auto; on node under the mouse, which changes
+        during scroll, will break mouse wheel scrolling in Safari */
+    pointer-events: none;
+}
+
+.ace_gutter-layer {
+    position: relative;
+    width: auto;
+    text-align: right;
+    pointer-events: auto;
+}
+
+.ace_text-layer {
+    font: inherit !important;
+}
+
+.ace_cjk {
+    display: inline-block;
+    text-align: center;
+}
+
+.ace_cursor-layer {
+    z-index: 4;
+}
+
+.ace_cursor {
+    z-index: 4;
+    position: absolute;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-left: 2px solid
+}
+
+.ace_slim-cursors .ace_cursor {
+    border-left-width: 1px;
+}
+
+.ace_overwrite-cursors .ace_cursor {
+    border-left-width: 0;
+    border-bottom: 1px solid;
+}
+
+.ace_hidden-cursors .ace_cursor {
+    opacity: 0.2;
+}
+
+.ace_smooth-blinking .ace_cursor {
+    -webkit-transition: opacity 0.18s;
+            transition: opacity 0.18s;
+}
+
+.ace_editor.ace_multiselect .ace_cursor {
+    border-left-width: 1px;
+}
+
+.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {
+    position: absolute;
+    z-index: 3;
+}
+
+.ace_marker-layer .ace_selection {
+    position: absolute;
+    z-index: 5;
+}
+
+.ace_marker-layer .ace_bracket {
+    position: absolute;
+    z-index: 6;
+}
+
+.ace_marker-layer .ace_active-line {
+    position: absolute;
+    z-index: 2;
+}
+
+.ace_marker-layer .ace_selected-word {
+    position: absolute;
+    z-index: 4;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ace_line .ace_fold {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    display: inline-block;
+    height: 11px;
+    margin-top: -2px;
+    vertical-align: middle;
+
+    background-image:
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");
+    background-repeat: no-repeat, repeat-x;
+    background-position: center center, top left;
+    color: transparent;
+
+    border: 1px solid black;
+    border-radius: 2px;
+
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.ace_dark .ace_fold {
+}
+
+.ace_fold:hover{
+    background-image:
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");
+}
+
+.ace_tooltip {
+    background-color: #FFF;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+    border: 1px solid gray;
+    border-radius: 1px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: black;
+    max-width: 100%;
+    padding: 3px 4px;
+    position: fixed;
+    z-index: 999999;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: default;
+    white-space: pre;
+    word-wrap: break-word;
+    line-height: normal;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    pointer-events: none;
+}
+
+.ace_folding-enabled > .ace_gutter-cell {
+    padding-right: 13px;
+}
+
+.ace_fold-widget {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    margin: 0 -12px 0 1px;
+    display: none;
+    width: 11px;
+    vertical-align: top;
+
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-radius: 3px;
+    
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.ace_folding-enabled .ace_fold-widget {
+    display: inline-block;   
+}
+
+.ace_fold-widget.ace_end {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");
+}
+
+.ace_fold-widget.ace_closed {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");
+}
+
+.ace_fold-widget:hover {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.ace_fold-widget:active {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+/**
+ * Dark version for fold widgets
+ */
+.ace_dark .ace_fold-widget {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");
+}
+.ace_dark .ace_fold-widget.ace_end {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");
+}
+.ace_dark .ace_fold-widget.ace_closed {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");
+}
+.ace_dark .ace_fold-widget:hover {
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.ace_dark .ace_fold-widget:active {
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.ace_fold-widget.ace_invalid {
+    background-color: #FFB4B4;
+    border-color: #DE5555;
+}
+
+.ace_fade-fold-widgets .ace_fold-widget {
+    -webkit-transition: opacity 0.4s ease 0.05s;
+            transition: opacity 0.4s ease 0.05s;
+    opacity: 0;
+}
+
+.ace_fade-fold-widgets:hover .ace_fold-widget {
+    -webkit-transition: opacity 0.05s ease 0.05s;
+            transition: opacity 0.05s ease 0.05s;
+    opacity:1;
+}
+
+.ace_underline {
+    text-decoration: underline;
+}
+
+.ace_bold {
+    font-weight: bold;
+}
+
+.ace_nobold .ace_bold {
+    font-weight: normal;
+}
+
+.ace_italic {
+    font-style: italic;
+}
+
+
+.ace_error-marker {
+    background-color: rgba(255, 0, 0,0.2);
+    position: absolute;
+    z-index: 9;
+}
+
+.ace_highlight-marker {
+    background-color: rgba(255, 255, 0,0.2);
+    position: absolute;
+    z-index: 8;
+}
+</style><style id="ace-tm">.ace-tm .ace_gutter {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.ace-tm .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8;
+}
+
+.ace-tm .ace_fold {
+    background-color: #6B72E6;
+}
+
+.ace-tm {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.ace-tm .ace_cursor {
+  color: black;
+}
+        
+.ace-tm .ace_invisible {
+  color: rgb(191, 191, 191);
+}
+
+.ace-tm .ace_storage,
+.ace-tm .ace_keyword {
+  color: blue;
+}
+
+.ace-tm .ace_constant {
+  color: rgb(197, 6, 11);
+}
+
+.ace-tm .ace_constant.ace_buildin {
+  color: rgb(88, 72, 246);
+}
+
+.ace-tm .ace_constant.ace_language {
+  color: rgb(88, 92, 246);
+}
+
+.ace-tm .ace_constant.ace_library {
+  color: rgb(6, 150, 14);
+}
+
+.ace-tm .ace_invalid {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
+}
+
+.ace-tm .ace_support.ace_function {
+  color: rgb(60, 76, 114);
+}
+
+.ace-tm .ace_support.ace_constant {
+  color: rgb(6, 150, 14);
+}
+
+.ace-tm .ace_support.ace_type,
+.ace-tm .ace_support.ace_class {
+  color: rgb(109, 121, 222);
+}
+
+.ace-tm .ace_keyword.ace_operator {
+  color: rgb(104, 118, 135);
+}
+
+.ace-tm .ace_string {
+  color: rgb(3, 106, 7);
+}
+
+.ace-tm .ace_comment {
+  color: rgb(76, 136, 107);
+}
+
+.ace-tm .ace_comment.ace_doc {
+  color: rgb(0, 102, 255);
+}
+
+.ace-tm .ace_comment.ace_doc.ace_tag {
+  color: rgb(128, 159, 191);
+}
+
+.ace-tm .ace_constant.ace_numeric {
+  color: rgb(0, 0, 205);
+}
+
+.ace-tm .ace_variable {
+  color: rgb(49, 132, 149);
+}
+
+.ace-tm .ace_xml-pe {
+  color: rgb(104, 104, 91);
+}
+
+.ace-tm .ace_entity.ace_name.ace_function {
+  color: #0000A2;
+}
+
+
+.ace-tm .ace_heading {
+  color: rgb(12, 7, 255);
+}
+
+.ace-tm .ace_list {
+  color:rgb(185, 6, 144);
+}
+
+.ace-tm .ace_meta.ace_tag {
+  color:rgb(0, 22, 142);
+}
+
+.ace-tm .ace_string.ace_regex {
+  color: rgb(255, 0, 0)
+}
+
+.ace-tm .ace_marker-layer .ace_selection {
+  background: rgb(181, 213, 255);
+}
+.ace-tm.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px white;
+  border-radius: 2px;
+}
+.ace-tm .ace_marker-layer .ace_step {
+  background: rgb(252, 255, 0);
+}
+
+.ace-tm .ace_marker-layer .ace_stack {
+  background: rgb(164, 229, 101);
+}
+
+.ace-tm .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgb(192, 192, 192);
+}
+
+.ace-tm .ace_marker-layer .ace_active-line {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.ace-tm .ace_gutter-active-line {
+    background-color : #dcdcdc;
+}
+
+.ace-tm .ace_marker-layer .ace_selected-word {
+  background: rgb(250, 250, 255);
+  border: 1px solid rgb(200, 200, 250);
+}
+
+.ace-tm .ace_indent-guide {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+}
+</style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/tooltip" src="./DOM Visualizer_files/tooltip.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/theme/monokai" src="./DOM Visualizer_files/monokai.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/html" src="./DOM Visualizer_files/html.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/javascript" src="./DOM Visualizer_files/javascript.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/css" src="./DOM Visualizer_files/css.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/html_highlight_rules" src="./DOM Visualizer_files/html_highlight_rules.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/behaviour/xml" src="./DOM Visualizer_files/xml.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/folding/html" src="./DOM Visualizer_files/html(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/html_completions" src="./DOM Visualizer_files/html_completions.js"></script><style id="ace-monokai">.ace-monokai .ace_gutter {
+  background: #2F3129;
+  color: #8F908A
+}
+
+.ace-monokai .ace_print-margin {
+  width: 1px;
+  background: #555651
+}
+
+.ace-monokai {
+  background-color: #272822;
+  color: #F8F8F2
+}
+
+.ace-monokai .ace_cursor {
+  color: #F8F8F0
+}
+
+.ace-monokai .ace_marker-layer .ace_selection {
+  background: #49483E
+}
+
+.ace-monokai.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #272822;
+  border-radius: 2px
+}
+
+.ace-monokai .ace_marker-layer .ace_step {
+  background: rgb(102, 82, 0)
+}
+
+.ace-monokai .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid #49483E
+}
+
+.ace-monokai .ace_marker-layer .ace_active-line {
+  background: #202020
+}
+
+.ace-monokai .ace_gutter-active-line {
+  background-color: #272727
+}
+
+.ace-monokai .ace_marker-layer .ace_selected-word {
+  border: 1px solid #49483E
+}
+
+.ace-monokai .ace_invisible {
+  color: #52524d
+}
+
+.ace-monokai .ace_entity.ace_name.ace_tag,
+.ace-monokai .ace_keyword,
+.ace-monokai .ace_meta.ace_tag,
+.ace-monokai .ace_storage {
+  color: #F92672
+}
+
+.ace-monokai .ace_punctuation,
+.ace-monokai .ace_punctuation.ace_tag {
+  color: #fff
+}
+
+.ace-monokai .ace_constant.ace_character,
+.ace-monokai .ace_constant.ace_language,
+.ace-monokai .ace_constant.ace_numeric,
+.ace-monokai .ace_constant.ace_other {
+  color: #AE81FF
+}
+
+.ace-monokai .ace_invalid {
+  color: #F8F8F0;
+  background-color: #F92672
+}
+
+.ace-monokai .ace_invalid.ace_deprecated {
+  color: #F8F8F0;
+  background-color: #AE81FF
+}
+
+.ace-monokai .ace_support.ace_constant,
+.ace-monokai .ace_support.ace_function {
+  color: #66D9EF
+}
+
+.ace-monokai .ace_fold {
+  background-color: #A6E22E;
+  border-color: #F8F8F2
+}
+
+.ace-monokai .ace_storage.ace_type,
+.ace-monokai .ace_support.ace_class,
+.ace-monokai .ace_support.ace_type {
+  font-style: italic;
+  color: #66D9EF
+}
+
+.ace-monokai .ace_entity.ace_name.ace_function,
+.ace-monokai .ace_entity.ace_other,
+.ace-monokai .ace_entity.ace_other.ace_attribute-name,
+.ace-monokai .ace_variable {
+  color: #A6E22E
+}
+
+.ace-monokai .ace_variable.ace_parameter {
+  font-style: italic;
+  color: #FD971F
+}
+
+.ace-monokai .ace_string {
+  color: #E6DB74
+}
+
+.ace-monokai .ace_comment {
+  color: #75715E
+}
+
+.ace-monokai .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y
+}</style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/css_highlight_rules" src="./DOM Visualizer_files/css_highlight_rules.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/javascript_highlight_rules" src="./DOM Visualizer_files/javascript_highlight_rules.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/xml_highlight_rules" src="./DOM Visualizer_files/xml_highlight_rules.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/matching_brace_outdent" src="./DOM Visualizer_files/matching_brace_outdent.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/behaviour/css" src="./DOM Visualizer_files/css(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/folding/cstyle" src="./DOM Visualizer_files/cstyle.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/behaviour/cstyle" src="./DOM Visualizer_files/cstyle(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/folding/mixed" src="./DOM Visualizer_files/mixed.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/folding/xml" src="./DOM Visualizer_files/xml(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ace/mode/doc_comment_highlight_rules" src="./DOM Visualizer_files/doc_comment_highlight_rules.js"></script></head>
+<body id="body" class="module pushed">
+<style>
+    body.pushed {
+        margin-right: 275px !important;
+    }
+    @font-face {
+        font-family: 'icomoon';
+        src:url('fonts/icomoon.eot?5c85ku');
+        src:url('fonts/icomoon.eot?#iefix5c85ku') format('embedded-opentype'),
+        url('fonts/icomoon.woff?5c85ku') format('woff'),
+        url('fonts/icomoon.ttf?5c85ku') format('truetype'),
+        url('fonts/icomoon.svg?5c85ku#icomoon') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        font-family: 'icomoon';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-tree:before {
+        content: "\e600";
+    }
+
+</style>
+
+<div id="container">
+    <div id="treePane" style="height: 60.0467%;"><svg width="1498.2352941176468" height="504"><g transform="translate(-76.88235294117646,30)"><path class="link" d="M653.9558823529411,0C653.9558823529411,57.375 290.6470588235294,57.375 290.6470588235294,114.75" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M653.9558823529411,0C653.9558823529411,57.375 653.9558823529411,57.375 653.9558823529411,114.75" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M653.9558823529411,0C653.9558823529411,57.375 1017.2647058823529,57.375 1017.2647058823529,114.75" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M290.6470588235294,114.75C290.6470588235294,172.125 96.88235294117646,172.125 96.88235294117646,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M290.6470588235294,114.75C290.6470588235294,172.125 193.76470588235293,172.125 193.76470588235293,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M290.6470588235294,114.75C290.6470588235294,172.125 290.6470588235294,172.125 290.6470588235294,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M290.6470588235294,114.75C290.6470588235294,172.125 387.52941176470586,172.125 387.52941176470586,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M290.6470588235294,114.75C290.6470588235294,172.125 484.4117647058823,172.125 484.4117647058823,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M387.52941176470586,229.5C387.52941176470586,286.875 387.52941176470586,286.875 387.52941176470586,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1017.2647058823529,114.75C1017.2647058823529,172.125 678.1764705882352,172.125 678.1764705882352,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1017.2647058823529,114.75C1017.2647058823529,172.125 775.0588235294117,172.125 775.0588235294117,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1017.2647058823529,114.75C1017.2647058823529,172.125 1017.2647058823529,172.125 1017.2647058823529,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1017.2647058823529,114.75C1017.2647058823529,172.125 1259.4705882352941,172.125 1259.4705882352941,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1017.2647058823529,114.75C1017.2647058823529,172.125 1356.3529411764705,172.125 1356.3529411764705,229.5" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M775.0588235294117,229.5C775.0588235294117,286.875 775.0588235294117,286.875 775.0588235294117,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,229.5C1259.4705882352941,286.875 968.8235294117646,286.875 968.8235294117646,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,229.5C1259.4705882352941,286.875 1065.705882352941,286.875 1065.705882352941,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,229.5C1259.4705882352941,286.875 1162.5882352941176,286.875 1162.5882352941176,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,229.5C1259.4705882352941,286.875 1259.4705882352941,286.875 1259.4705882352941,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,229.5C1259.4705882352941,286.875 1356.3529411764705,286.875 1356.3529411764705,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,229.5C1259.4705882352941,286.875 1453.2352941176468,286.875 1453.2352941176468,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,229.5C1259.4705882352941,286.875 1550.1176470588234,286.875 1550.1176470588234,344.25" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1259.4705882352941,344.25C1259.4705882352941,401.625 1259.4705882352941,401.625 1259.4705882352941,459" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><path class="link" d="M1453.2352941176468,344.25C1453.2352941176468,401.625 1453.2352941176468,401.625 1453.2352941176468,459" style="opacity: 1; fill: none; stroke: rgb(204, 204, 204);"></path><g class="node element" transform="translate(653.9558823529411,0)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">html</text></g><g class="node element" transform="translate(290.6470588235294,114.75)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">head</text></g><g class="node text indent" transform="translate(96.88235294117646,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node element" transform="translate(193.76470588235293,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">meta</text></g><g class="node text indent" transform="translate(290.6470588235294,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node element" transform="translate(387.52941176470586,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">title</text></g><g class="node text" transform="translate(387.52941176470586,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(80, 180, 86); stroke: rgb(13, 149, 44);"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node text indent" transform="translate(484.4117647058823,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node text indent" transform="translate(653.9558823529411,114.75)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node element" transform="translate(1017.2647058823529,114.75)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">body</text></g><g class="node text indent" transform="translate(678.1764705882352,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node element" transform="translate(775.0588235294117,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">h1#title</text></g><g class="node text" transform="translate(775.0588235294117,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(80, 180, 86); stroke: rgb(13, 149, 44);"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node text indent" transform="translate(1017.2647058823529,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node element" transform="translate(1259.4705882352941,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">div.contact</text></g><g class="node text indent" transform="translate(968.8235294117646,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node comment" transform="translate(1065.705882352941,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(154, 80, 150); stroke: purple;"></circle><text text-anchor="middle" dy="-15">&lt;!-- --&gt;</text></g><g class="node text indent" transform="translate(1162.5882352941176,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node element" transform="translate(1259.4705882352941,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">h2</text></g><g class="node text" transform="translate(1259.4705882352941,459)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(80, 180, 86); stroke: rgb(13, 149, 44);"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node text indent" transform="translate(1356.3529411764705,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node element" transform="translate(1453.2352941176468,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: steelblue; stroke: rgb(53, 94, 149);"></circle><text text-anchor="middle" dy="-15">p#twitter</text></g><g class="node text" transform="translate(1453.2352941176468,459)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(80, 180, 86); stroke: rgb(13, 149, 44);"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node text indent" transform="translate(1550.1176470588234,344.25)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g><g class="node text indent" transform="translate(1356.3529411764705,229.5)" style="opacity: 1; font-size: 11px; font-weight: bold;"><circle r="10" style="stroke-width: 1.5px; fill: rgb(255, 204, 0); stroke: orange;"></circle><text text-anchor="middle" dy="-15">#text</text></g></g></svg></div>
+    <div id="editorPane" style="height: 39.9533%;">
+        <div class="ui horizontal icon divider fitted">
+            <i class="resize vertical icon"></i>
+        </div>
+        <div id="editor" class=" ace_editor ace-monokai ace_dark ace_focus"><textarea class="ace_text-input" wrap="off" autocapitalize="off" spellcheck="false" style="height: 15px; left: 46px; top: 0px; width: 8.89px;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 348px; width: 42px;"><div class="ace_gutter-cell  ace_info" style="height: 15px;">1</div><div class="ace_gutter-cell " style="height: 15px;">2</div><div class="ace_gutter-cell " style="height: 15px;">3</div><div class="ace_gutter-cell " style="height: 15px;">4</div><div class="ace_gutter-cell " style="height: 15px;">5</div></div><div class="ace_gutter-active-line" style="top: 0px; height: 15px;"></div></div><div class="ace_scroller" style="left: 42px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 1587px; height: 348px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 715.2px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_selection ace_start" style="height:15px;right:0;top:0px;left:4px;"></div><div class="ace_selection" style="height:15px;width:213.36px;top:60px;left:4px;"></div><div class="ace_selection" style="height:45px;right:0;top:15px;left:4px;"></div></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line" style="height:15px"><span class="ace_text ace_xml">let&nbsp;d&nbsp;=&nbsp;document.createElement("div");</span></div><div class="ace_line" style="height:15px"><span class="ace_text ace_xml">d.innerHTML&nbsp;=&nbsp;"test";</span></div><div class="ace_line" style="height:15px"><span class="ace_text ace_xml">let&nbsp;newD&nbsp;=&nbsp;d;</span></div><div class="ace_line" style="height:15px"><span class="ace_text ace_xml">document.body.append(d);</span></div><div class="ace_line" style="height:15px"><span class="ace_text ace_xml">document.body.append(newD);</span></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer"><div class="ace_cursor" style="left: 4px; top: 0px; width: 8.89px; height: 15px; visibility: hidden;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 20px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 20px; height: 75px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="height: 20px; left: 42px; right: 0px; display: none;"><div class="ace_scrollbar-inner" style="height: 20px; width: 435px;"></div></div><div style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; white-space: pre; font: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
+    </div>
+</div>
+
+<div class="ui vertical menu sidebar right active">
+    <div class="item">
+        <h2 style="margin-bottom: 0.4em">
+            <span class="icon-tree"></span>
+            d3.domVisualizer
+        </h2>
+
+        <div style="font-size: 0.9em; color: #999;">by Romain Bohdanowicz - @bioub</div>
+    </div>
+    <a class="item" id="fitToScreen">
+        <div class="ui checkbox">
+            <input type="checkbox" checked="">
+            <label>Fit to screen</label>
+        </div>
+    </a>
+    <a class="item" id="showTextNodes">
+        <div class="ui checkbox">
+            <input type="checkbox" checked="">
+            <label>Show Text Nodes</label>
+        </div>
+    </a>
+    <a class="item" id="showIndentNodes">
+        <div class="ui checkbox ">
+            <input type="checkbox" checked="">
+            <label>Show Indent Nodes</label>
+        </div>
+    </a>
+    <a class="item" id="autoupdate">
+        <div class="ui checkbox">
+            <input type="checkbox">
+            <label>Auto-update when valid</label>
+        </div>
+    </a>
+
+    <div class="item">
+        <div id="update" class="ui green fluid submit button">
+            <i class="ui icon refresh"></i>
+            Update
+        </div>
+    </div>
+
+    <div class="item">
+        <div id="download" class="ui blue fluid submit button">
+            <i class="ui icon download disk"></i>
+            Download SVG
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+
+
+<!-- build:js app/vendor.js -->
+<!-- bower:js -->
+<script src="./DOM Visualizer_files/d3.js"></script>
+<script src="./DOM Visualizer_files/require.js"></script>
+<!-- endbower -->
+<!--<script src="../bower_components/node-delta/dist/browser/delta.js"></script>-->
+<!--<script src="../bower_components/ace-builds/src/ace.js"></script>-->
+<!-- endbuild -->
+
+
+<script src="./DOM Visualizer_files/d3.domVisualizer.min.js"></script>
+<script>
+    require.config({
+        paths: {
+            "ace": "bower_components/ace/lib/ace",
+            "d3": "bower_components/d3/d3",
+            "delta": "bower_components/node-delta/lib",
+            "xmlshim": "bower_components/node-delta/node_modules/xmlshim"
+        }
+    });
+
+    require(["ace/ace", "bower_components/d3/d3", "js/d3.domVisualizer"], function (ace, d3, domVisualizer) {
+
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/html");
+
+        var domRenderer = new d3.domVisualizer("#treePane");
+        domRenderer.parseHTML(editor.getValue());
+        domRenderer.update(true);
+
+        $('#download').click(function (e) {
+            var svg = document.querySelector("svg");
+
+            var source = (new XMLSerializer()).serializeToString(svg);
+            var url = URL.createObjectURL(new Blob([source], { "type" : "text\/xml" }));
+
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.setAttribute("class", "svg-crowbar");
+            a.setAttribute("download", "domVisualization.svg");
+            a.setAttribute("href", url);
+            a.style["display"] = "none";
+            a.target = "_blank";
+            a.click();
+            document.body.removeChild(a);
+
+            setTimeout(function() {
+                URL.revokeObjectURL(url);
+            }, 10);
+        });
+
+        $('a.item').click(function (e) {
+            e.preventDefault();
+
+            var checkbox = $(this).find('.checkbox:not(.disabled) input');
+            checkbox[0].checked = !checkbox[0].checked;
+        });
+
+        $('#autoupdate').click(function (e) {
+            e.preventDefault();
+
+            function onChangeAnnotation() {
+                if (!editor.getSession().getAnnotations().length) {
+                    domRenderer.parseHTML(editor.getValue());
+                    domRenderer.update(true);
+                }
+            }
+
+            if($('#update').hasClass('disabled')) {
+                $('#update').removeClass('disabled');
+                editor.getSession().off("changeAnnotation", onChangeAnnotation);
+            }
+            else {
+                $('#update').addClass('disabled');
+                editor.getSession().on("changeAnnotation", onChangeAnnotation);
+            }
+        });
+
+        $('#update:not(.disabled)').click(function (e) {
+            e.preventDefault();
+            domRenderer.parseHTML(editor.getValue());
+            domRenderer.update(true);
+        });
+
+
+        $('#fitToScreen').click(function (e) {
+            e.preventDefault();
+            if ($(this).find('input[type="checkbox"]').prop('checked')) {
+                domRenderer.tree.nodeSize(null);
+                domRenderer.tree.size([domRenderer.container.clientWidth + 43,
+                            domRenderer.container.clientHeight - 45]);
+            }
+            else {
+                domRenderer.tree.size([ 1, 1 ]);
+                domRenderer.tree.nodeSize(domRenderer.nodeSize);
+            }
+            domRenderer.update(false);
+        });
+
+        $('#showTextNodes').click(function (e) {
+            $('#showIndentNodes .ui.checkbox').toggleClass('disabled');
+        });
+
+        var offsetYDown = 0;
+        $('.divider').mousedown(function(e){
+
+            offsetYDown = e.clientY - this.parentNode.offsetTop - this.offsetTop;
+            console.log(offsetYDown);
+            $(window).on('mousemove', resize)
+
+        });
+
+        function resize(e) {
+            var container = document.querySelector('#container')
+
+            var tree = document.querySelector('#treePane');
+
+            var nextTreeHeight = e.clientY - offsetYDown - 4 - tree.offsetTop;
+
+            if(nextTreeHeight / $('#container').innerHeight() > 0.3 &&
+                    nextTreeHeight / $('#container').innerHeight() < 0.9) {
+                tree.style.height = nextTreeHeight + 'px';
+                var editorPane = document.querySelector('#editorPane');
+                editorPane.style.height = $('#container').innerHeight() - $('#treePane').outerHeight() + "px";
+
+
+                domRenderer.tree.size([domRenderer.container.clientWidth+43, domRenderer.container.clientHeight-45]);
+                domRenderer.update(false);
+            }
+        }
+
+
+        $(window).resize(function(e) {
+            domRenderer.tree.size([domRenderer.container.clientWidth+43, domRenderer.container.clientHeight-45]);
+            domRenderer.update(false);
+        });
+
+        $(window).mouseup(function(e){
+            $(window).off('mousemove', resize);
+            $('#treePane').css('height', $('#treePane').outerHeight() / $('#container').innerHeight() * 100 + "%");
+            $('#editorPane').css('height', $('#editorPane').outerHeight() / $('#container').innerHeight() * 100 + "%");
+        });
+//        textNodesCheckbox.addEventListener('click', function () {
+        //        if (textNodesCheckbox.checked) {
+        //            domRenderer.addNodesByType("text");
+        //            if (indentNodesCheckbox.checked) {
+        //                domRenderer.addNodesByType("text indent");
+        //            }
+        //        }
+        //        else {
+        //            domRenderer.removeNodesByType("text");
+        //        }
+        //
+        //        domRenderer.update(true);
+        //
+        //        indentNodesCheckbox.parentNode.style.display = (indentNodesCheckbox.parentNode.style.display === "inline" || indentNodesCheckbox.parentNode.style.display === "") ? "none" : "inline";
+        //    });
+
+    });
+    //(function () {
+    //    'use strict';
+    //
+    //    var editor = ace.edit("editor");
+    //    editor.setTheme("ace/theme/monokai");
+    //    editor.getSession().setMode("ace/mode/html");
+    //
+    //    var domRenderer = new d3.domVisualizer("#tree");
+    //    domRenderer.parseHTML(editor.getValue());
+    //    domRenderer.update(true);
+    //
+    //
+    //    var textNodesCheckbox = document.querySelector('#showTextNodes input[type="checkbox"]');
+    //    var indentNodesCheckbox = document.querySelector('#showIndentNodes input[type="checkbox"]');
+    //
+    //    document.querySelector('#update').addEventListener('click', function () {
+    //        domRenderer.parseHTML(editor.getValue());
+    //        domRenderer.update(true);
+    //    });
+    //
+    //    textNodesCheckbox.addEventListener('click', function () {
+    //        if (textNodesCheckbox.checked) {
+    //            domRenderer.addNodesByType("text");
+    //            if (indentNodesCheckbox.checked) {
+    //                domRenderer.addNodesByType("text indent");
+    //            }
+    //        }
+    //        else {
+    //            domRenderer.removeNodesByType("text");
+    //        }
+    //
+    //        domRenderer.update(true);
+    //
+    //        indentNodesCheckbox.parentNode.style.display = (indentNodesCheckbox.parentNode.style.display === "inline" || indentNodesCheckbox.parentNode.style.display === "") ? "none" : "inline";
+    //    });
+    //
+    //    indentNodesCheckbox.addEventListener('click', function () {
+    //        if (indentNodesCheckbox.checked) {
+    //            domRenderer.addNodesByType("text indent");
+    //        }
+    //        else {
+    //            domRenderer.removeNodesByType("text indent");
+    //        }
+    //
+    //        domRenderer.update(true);
+    //    });
+    //
+    //    document.querySelector("#expand").addEventListener("input", function() {
+    //        domRenderer.autosize(this.value);
+    //        domRenderer.update(true);
+    //    });
+    //
+    //    document.querySelector('#fitToScreen input[type="checkbox"]').addEventListener("click", function() {
+    //        if (this.checked) {
+    //            console.log("checked")
+    //            domRenderer.tree.nodeSize(null);
+    //            domRenderer.tree.size([domRenderer.container.clientWidth+43, domRenderer.container.clientHeight-45]);
+    //        }
+    //        else {
+    //            console.log("unchecked")
+    //            domRenderer.tree.size([ 1, 1 ]);
+    //            domRenderer.tree.nodeSize(domRenderer.nodeSize);
+    //        }
+    //        domRenderer.update(false);
+    //    });
+    //}());
+
+    //
+</script>
+
+</body></html>

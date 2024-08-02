@@ -1,0 +1,36 @@
+.container{
+    margin-top: 10%;
+}
+
+.card {
+    padding: 50px;
+    border: 1px solid #E1E1E8;
+    border-radius: 8px;
+}
+
+.card-title {
+    margin-top: 20px;
+    font-weight: 590;
+    font-size: 28px;
+    line-height: 32px;
+}
+
+.card-text{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card button{
+    background-color: #4F46E5;
+    border-radius: 4px;
+}
+
+.card button .addIcon{
+    margin-right: 1rem;
+}

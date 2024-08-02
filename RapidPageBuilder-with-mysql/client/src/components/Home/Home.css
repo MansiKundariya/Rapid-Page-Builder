@@ -1,0 +1,42 @@
+.dropdownbtn{
+    border: 1px solid #E1E1E8;
+    padding: 0.1rem 0.3rem;
+    margin-left: 0.5rem;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-by-side-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 4rem 0rem;
+    align-items: center; /* Vertically center items */
+  
+}
+
+.search-container {
+    width: 50%;
+    border-color: #9D9CAF;
+    line-height: 2rem;
+    
+}
+
+.blogTable {
+    margin-top: 20px;
+}
+
+.draft-color {
+    color: #D97706;
+    background-color: #FFFBEB;
+}
+
+.publish-color {
+    color: #059669;
+}
+
+.schedule-color {
+    color: #2563EB;
+}

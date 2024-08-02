@@ -1,0 +1,15 @@
+.home-container {
+    display: flex;
+}
+
+.horizontal-container {
+    margin-left: 61px;
+    width: calc(100% - 61px);
+}
+
+.horizontal-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+}

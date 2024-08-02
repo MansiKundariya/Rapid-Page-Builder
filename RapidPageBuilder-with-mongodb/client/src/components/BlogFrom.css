@@ -1,0 +1,58 @@
+/* form input[type="text"] {
+    gap: 6px;
+    border-radius: 4px;
+    border: 1px solid #D1D5DB;
+} */
+
+.forms {
+    padding-left: 3rem;
+}
+
+/* .modal-backdrop,.fade,.show{
+    opacity: 0!important;
+} */
+
+.forms p {
+    color: #6C6B80;
+    margin: 0rem 1rem;
+}
+
+.forms .mb-3{
+    margin: 0rem 3rem 0rem 1rem;
+}
+
+.dropdown{
+    margin-right: -1rem;
+    margin-top: -0.3rem;
+}
+
+.col1 {
+    border-right: 1px solid #D1D5DB;
+    height: 87vh;
+    padding: 3rem;
+}
+
+.form-right p {
+    margin-top: 2rem;
+    font-size: 20px;
+    font-weight: 590;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.config{
+    padding: 0px;
+}
+
+button{
+    margin-right: 1rem;
+}
+
+.horizontalLine{
+    margin: 0px;
+}
+
+.horizontalLine2{
+    width: 100%;
+}

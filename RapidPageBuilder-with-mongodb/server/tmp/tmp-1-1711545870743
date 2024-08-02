@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="509.806" height="498.268" viewBox="0 0 509.806 498.268">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Mask" width="209.286" height="211.818" rx="32" fill="#9f9f9f"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Mask-2" data-name="Mask" width="170.467" height="168.779" rx="32" fill="#9f9f9f"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect id="Mask-4" data-name="Mask" width="229.54" height="222.789" rx="32" fill="#ed7171"/>
+    </clipPath>
+  </defs>
+  <g id="Group_121" data-name="Group 121" transform="translate(-752.641 -2285.995)">
+    <g id="pic" transform="translate(752.583 2286.246)">
+      <circle id="Oval" cx="202.535" cy="202.535" r="202.535" transform="translate(90.448 83.663)" fill="#3d3c5b"/>
+      <path id="Path_4" data-name="Path 4" d="M198.763,226.349C145.2,281.931,12,283.313,2.558,243.672c-19.41-81.462,76.98-44.768,109.706-110.534,25.561-51.367-23.441-91.411,6.87-123.733,27.707-29.545,102.614,16.64,115.917,54.009" transform="translate(0.969 0.754)" fill="none" stroke="#8dbaff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke-dasharray="10"/>
+      <circle id="Oval-2" data-name="Oval" cx="5.063" cy="5.063" r="5.063" transform="translate(232.223 59.19)" fill="#ed7171"/>
+      <g id="Bitmap" transform="translate(300.578 38.093)">
+        <rect id="Mask-5" data-name="Mask" width="209.286" height="211.818" rx="32" fill="#9f9f9f"/>
+      </g>
+      <g id="Bitmap-3" data-name="Bitmap" transform="translate(298.891 329.237)">
+        <rect id="Mask-6" data-name="Mask" width="170.467" height="168.779" rx="32" fill="#9f9f9f"/>
+      </g>
+      <g id="Bitmap-5" data-name="Bitmap" transform="translate(28.844 302.232)">
+        <rect id="Mask-7" data-name="Mask" width="170.467" height="168.779" rx="32" fill="#9f9f9f"/>
+      </g>
+      <g id="Bitmap-7" data-name="Bitmap" transform="translate(141.926 190.838)">
+        <rect id="Mask-8" data-name="Mask" width="229.54" height="222.789" rx="32" fill="#ed7171"/>
+      </g>
+      <g id="Group_4" data-name="Group 4" transform="translate(79.478 127.546)">
+        <rect id="Rectangle" width="101.268" height="106.331" rx="32" fill="#0666f6"/>
+        <path id="Combined_Shape" data-name="Combined Shape" d="M8.394,53.545.465,45.665a1.579,1.579,0,0,1,0-2.238l9.379-9.358a7.889,7.889,0,0,1,5.606-2.318H31.935a1.379,1.379,0,0,1,1.226,2.02l-1.818,3.461a1.584,1.584,0,0,1-1.407.849H19.167a1.582,1.582,0,1,0,0,3.164h10.77A4.75,4.75,0,0,0,34.153,38.7l4.865-9.263a7.515,7.515,0,0,1,6.655-4.017,1.582,1.582,0,0,1,1.4,2.318l-7.3,13.9a11.078,11.078,0,0,1-9.835,5.935H16.652l-6.015,5.971a1.587,1.587,0,0,1-2.243,0Zm6.015-24.958A1.586,1.586,0,0,1,12.824,27V7.912a1.586,1.586,0,0,1,1.586-1.583h4.758V4.747a4.758,4.758,0,0,1,9.516,0V6.329H33.44a1.586,1.586,0,0,1,1.586,1.583V27a1.586,1.586,0,0,1-1.586,1.583Zm7.929-23.84V6.329H25.51V4.747a1.586,1.586,0,0,0-3.172,0Z" transform="translate(27.005 26.161)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+/* .navbar,
+hr {
+    margin-left: 3.8rem;
+} */
+
+.navbar {
+    margin-top: 0.5rem;
+}
+
+.nav-item a {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.navbar-brand {
+    margin-left: 2rem;
+}
+
+.menu{
+    border: "1px solid #E1E1E8";
+    background-color: transparent;
+    margin-top: 0.3rem;
+}
+
+
+.buttons {
+    margin-right: 3rem;
+}
+
+.buttons button {
+    margin-bottom: 10px;
+}
+
+.modal-header {
+    background-color: black;
+    color: white;
+}
+
+.modal-title{
+    font-size: 20px;
+    font-weight: 690;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}

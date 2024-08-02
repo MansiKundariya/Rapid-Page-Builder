@@ -1,0 +1,75 @@
+/* Dropdown */
+.dropdown-toggle {
+    border: 1px solid #ceced0;
+    margin-left: 1rem;
+}
+
+.dropdownbtn {
+    border: 1px solid #E1E1E8;
+    padding: 0.1rem 0.3rem;
+    margin-left: 0.5rem;
+}
+
+.noOfRecords{
+    margin-left: -115rem;
+}
+
+.createdByClass {
+    margin-right: -70rem;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.blogTable {
+    margin-top: 20px;
+}
+
+/* Status */
+.draft-color {
+    padding: 0.2rem;
+    color: #D97706;
+    background-color: #FFFBEB;
+}
+
+.publish-color {
+    padding: 0.2rem;
+    color: #059669;
+    background-color: #ECFDF5;
+}
+
+.schedule-color {
+    padding: 0.2rem;
+    color: #2563EB;
+    background-color: #EFF6FF;
+}
+
+.side-by-side-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 4rem 0rem;
+    align-items: center;
+}
+
+/* Srearch bar */
+.search-container {
+    width: 50%;
+    line-height: 2rem;
+    position: relative;
+}
+
+.search-input {
+    border: 1px solid #D1D1DB;
+    border-radius: 0.4rem;
+    padding-left: 30px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+}
